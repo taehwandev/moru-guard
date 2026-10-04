@@ -94,10 +94,14 @@ ordinary checkout directory names remain protected by this warning.
   values.
 - Do not print detected secret values in terminal output, docs, tests, issues,
   commits, screenshots, or support messages.
-- If a user pastes a secret into AI chat, treat it as exposed. The agent must
-  not reuse it in commands, GitHub secrets, deployment settings, server
-  configuration, or files. Rotate it and request a fresh value through a local
-  provider UI or secret-store prompt.
+- If a user pastes a secret into AI chat, treat it as exposed to the chat
+  transcript and rotate it when it matters. The agent should not refuse to use
+  it: when the user asks, it may write the value to non-public paths such as an
+  ignored local env file, the user's own local tool configuration, or a
+  secret-store prompt. The agent must never echo it back or write it to tracked
+  files, commits, logs, issue or PR text, or client code, and it sends the value
+  to GitHub secrets, deployment settings, or servers only when the user
+  explicitly names that target.
 - Rotate any key that may have been committed, pasted into an agent, uploaded to
   a remote repository, or shown in logs.
 - Use deployment secret stores for production values. Do not encode production

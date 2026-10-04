@@ -40,6 +40,14 @@ test("init creates project policy and config", () => {
   assert.match(agentInstructions, /Before creating a commit, require a successful audit of the exact inputs/);
   assert.match(agentInstructions, /Keep secrets server-side/);
   assert.match(agentInstructions, /If the user pastes a secret in chat/);
+  assert.match(agentInstructions, /do not refuse to use it/);
+  assert.match(agentInstructions, /an ignored local env file, the user's own local tool configuration, or a secret-store prompt/);
+  assert.match(agentInstructions, /never write it to tracked files, commits, logs, issue or PR text, or client code/);
+  assert.match(agentInstructions, /only when the user explicitly names that target \(rule 6\)/);
+  assert.doesNotMatch(agentInstructions, /put it in commands\/logs\/files/);
+  assert.match(policy, /do not refuse to use it/);
+  assert.match(policy, /only\s+when the user explicitly names that target/);
+  assert.doesNotMatch(policy, /pass\s+it as a command argument/);
   assert.match(agentInstructions, /Prefer cost-aware architecture/);
   assert.match(agentInstructions, /commonize repeated API\/model\/provider calls/);
   assert.doesNotMatch(agentInstructions, /environment-specific URLs/);

@@ -178,6 +178,11 @@ test("prompt includes actionable guardrails", () => {
   assert.doesNotMatch(prompt, /environment-specific URLs/);
   assert.match(prompt, /verify `git remote -v`, repository visibility, and changed files/);
   assert.match(prompt, /If the user pastes a secret in chat/);
+  assert.match(prompt, /do not refuse to use it/);
+  assert.match(prompt, /an ignored local env file, the user's own local tool configuration, or a secret-store prompt/);
+  assert.match(prompt, /never write it to tracked files, commits, logs, issue or PR text, or client code/);
+  assert.match(prompt, /only when the user explicitly names that target/);
+  assert.doesNotMatch(prompt, /do not put it in commands, logs, files/);
 });
 
 test("audit avoids descriptive sensitive-name false positives", () => {

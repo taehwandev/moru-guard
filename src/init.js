@@ -167,11 +167,13 @@ request updates based on age; legacy scheduling settings are inert in audits.
 
 ## Chat Secret Rule
 
-If the user pastes a secret in chat, treat it as exposed. Do not repeat it, pass
-it as a command argument, write it to logs, save it to repository files, add it
-to GitHub secrets yourself, or deploy it to a server. Tell the user to rotate
-the value and enter a new one only through a local provider UI or a secret-store
-prompt.
+If the user pastes a secret in chat, treat it as exposed to the chat transcript
+and recommend rotating it when it matters, but do not refuse to use it. When the
+user asks, write it only to non-public paths: an ignored local env file, the
+user's own local tool configuration, or a secret-store prompt. Never echo it
+back, and never write it to tracked files, commits, logs, issue or PR text, or
+client code. Send it to GitHub secrets, deployment settings, or servers only
+when the user explicitly names that target.
 
 ## Audience
 
@@ -240,7 +242,7 @@ deployment, or credentials:
 11. Before creating a commit, require a successful audit of the exact inputs being committed. Before pushing or publishing, require \`vibeguard audit . --strict\` for the exact inputs being published. A workflow, pre-commit, pre-push, or publish hook may supply the matching result under rule 1. Never reuse failed, skipped, uncertain, stale, or non-strict evidence for a strict requirement.
 12. Do not claim tests or audits ran unless they were observed. Run \`vibeguard evidence .\` before the final response only when execution evidence is available and no hook or earlier step in the same run already reported it.
 13. Keep secrets server-side. Do not expose provider keys, database URLs, signing secrets, service-role keys, or webhook secrets to client code.
-14. If the user pastes a secret in chat, treat it as exposed. Do not repeat it, put it in commands/logs/files/GitHub secrets/deployment settings/servers, or continue with deployment using that value. Guide the user to rotate it and enter a new value only through a local provider UI or secret-store prompt.
+14. If the user pastes a secret in chat, treat it as exposed to the chat transcript and recommend rotating it when it matters, but do not refuse to use it. Use it only where the user asks and only through non-public paths: an ignored local env file, the user's own local tool configuration, or a secret-store prompt. Never echo it back, and never write it to tracked files, commits, logs, issue or PR text, or client code. Send it to GitHub secrets, deployment settings, or servers only when the user explicitly names that target (rule 6).
 15. Keep VibeGuard scoped to guardrails. Do not clone, vendor, install, or link external playbooks or rule libraries unless the user explicitly asks for that separate setup.
 16. Preserve existing repo-local instructions. Only update the managed VibeGuard block between the \`vibeguard:start\` and \`vibeguard:end\` markers.
 

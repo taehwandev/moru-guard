@@ -36,11 +36,13 @@ request updates based on age; legacy scheduling settings are inert in audits.
 Never print detected secret values. If a secret may have been committed or shared,
 rotate it even after moving it into an ignored env file.
 
-If the user pastes a secret in chat, treat it as exposed. Do not repeat it, pass
-it as a command argument, write it to logs, save it to repository files, add it
-to GitHub secrets yourself, or deploy it to a server. Tell the user to rotate
-the value and enter a new one only through a local provider UI or a secret-store
-prompt.
+If the user pastes a secret in chat, treat it as exposed to the chat transcript
+and recommend rotating it when it matters, but do not refuse to use it. When the
+user asks, write it only to non-public paths: an ignored local env file, the
+user's own local tool configuration, or a secret-store prompt. Never echo it
+back, and never write it to tracked files, commits, logs, issue or PR text, or
+client code. Send it to GitHub secrets, deployment settings, or servers only
+when the user explicitly names that target.
 
 ## Git Gate Rule
 

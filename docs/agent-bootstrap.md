@@ -76,10 +76,13 @@ approves the next risky step.
 ## Safety Rules
 
 - Never print detected secret values.
-- If the user pastes a secret in chat, treat it as exposed. Do not repeat it,
-  place it in commands, logs, files, GitHub secrets, deployment settings, or any
-  server. Guide the user to rotate it and enter a new value only through a local
-  provider UI or secret-store prompt.
+- If the user pastes a secret in chat, treat it as exposed to the chat
+  transcript and recommend rotating it when it matters, but do not refuse to
+  use it. When the user asks, write it only to non-public paths: an ignored
+  local env file, the user's own local tool configuration, or a secret-store
+  prompt. Never echo it back, and never write it to tracked files, commits,
+  logs, issue or PR text, or client code. Send it to GitHub secrets, deployment
+  settings, or servers only when the user explicitly names that target.
 - Keep real secrets in ignored local env files only.
 - Keep env templates such as `.env.example` and `.env.sample` value-free.
 - Keep provider keys, database URLs, service-role keys, signing secrets, and
