@@ -68,7 +68,7 @@ user's way."
 The user should be able to paste only this link into an AI coding agent:
 
 ```text
-https://github.com/taehwandev/VibeGuard
+https://github.com/taehwandev/moru-guard
 ```
 
 The agent should infer that it needs to install or refresh Moru Guard in the
