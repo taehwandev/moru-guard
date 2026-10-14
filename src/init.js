@@ -23,13 +23,13 @@ export function initProject(projectRoot, options = {}) {
   }
 
   if (ensureStateGitignore(projectRoot)) {
-    applied.push("Updated .gitignore VibeGuard local state rules.");
+    applied.push("Updated .gitignore Moru Guard local state rules.");
   }
 
   const configChange = ensureConfig(projectRoot, options);
   if (configChange) applied.push(configChange);
   recordUpdateCheck(projectRoot, options.now ?? new Date());
-  applied.push("Updated VibeGuard update check state.");
+  applied.push("Updated Moru Guard update check state.");
 
   const policyPath = path.join(projectRoot, "VIBEGUARD.md");
   if (!pathExists(policyPath)) {
@@ -53,7 +53,7 @@ export function initProject(projectRoot, options = {}) {
 }
 
 function ensureStateGitignore(projectRoot) {
-  return appendUniqueLines(path.join(projectRoot, ".gitignore"), ["# VibeGuard local state", ".vibeguard/"]);
+  return appendUniqueLines(path.join(projectRoot, ".gitignore"), ["# Moru Guard local state", ".vibeguard/"]);
 }
 
 function ensureConfig(projectRoot, options) {
@@ -125,17 +125,17 @@ function ensureAgentInstructions(projectRoot) {
       const next = joinMarkdownSections(before, block, after);
       if (next === existing) return null;
       writeTextFile(agentPath, next);
-      return "Updated AGENTS.md VibeGuard instructions.";
+      return "Updated AGENTS.md Moru Guard instructions.";
     }
   }
 
   if (existing.trim().length === 0) {
     writeTextFile(agentPath, `${block}\n`);
-    return "Created AGENTS.md VibeGuard instructions.";
+    return "Created AGENTS.md Moru Guard instructions.";
   }
 
   writeTextFile(agentPath, `${existing.trimEnd()}\n\n${block}\n`);
-  return "Added VibeGuard instructions to AGENTS.md.";
+  return "Added Moru Guard instructions to AGENTS.md.";
 }
 
 function joinMarkdownSections(...sections) {
@@ -145,7 +145,7 @@ function joinMarkdownSections(...sections) {
 function policyTemplate(rulesPath) {
   return `# VIBEGUARD.md
 
-This project uses VibeGuard before AI-generated code changes.
+This project uses Moru Guard before AI-generated code changes.
 
 ## Operating Rule
 
@@ -159,7 +159,7 @@ ${approvalPolicy.rule}
 
 ## Update Policy
 
-Do not refresh VibeGuard on a timer or as part of ordinary audit, edit, review,
+Do not refresh Moru Guard on a timer or as part of ordinary audit, edit, review,
 commit, or push work. Run \`setup\` or \`update\` only when the user explicitly
 requests that operation for a relevant policy or compatibility change. Elapsed
 time alone is not a reason to update. Audits do not check registry versions or
@@ -213,8 +213,8 @@ that can create cost or quota pressure.
 
 ## Required Workflow
 
-1. Run \`vibeguard audit .\`.
-2. Run \`vibeguard audit . --fix\` for fixable safety issues.
+1. Run \`moru-guard audit .\`.
+2. Run \`moru-guard audit . --fix\` for fixable safety issues.
 3. Do not print secret values.
 4. Rotate any secret that may already have been exposed.
 5. Before commit or push, confirm \`git remote -v\`, repository visibility, and changed files.
@@ -224,28 +224,28 @@ that can create cost or quota pressure.
 
 function agentInstructionTemplate() {
   return `${AGENT_RULE_START}
-## VibeGuard
+## Moru Guard
 
 For every task that may change code, configuration, dependencies, data,
 deployment, or credentials:
 
-1. Run \`vibeguard audit .\` before editing. Reuse a successful workflow-hook audit only when it covers the same task, exact input bytes, rules, and audit mode. Missing, failed, skipped, changed, or uncertain evidence requires a fresh audit.
-2. Do not run VibeGuard \`setup\` or \`update\` during ordinary work. Run either operation only when the user explicitly requests that exact VibeGuard maintenance action.
-3. If \`vibeguard\` is unavailable, run \`npx --yes @taehwandev/vibeguard@latest audit .\` instead and use the same \`npx --yes @taehwandev/vibeguard@latest ...\` form for fixes.
-4. If fixable findings exist, run \`vibeguard audit . --fix\` before implementing.
+1. Run \`moru-guard audit .\` before editing. Reuse a successful workflow-hook audit only when it covers the same task, exact input bytes, rules, and audit mode. Missing, failed, skipped, changed, or uncertain evidence requires a fresh audit.
+2. Do not run Moru Guard \`setup\` or \`update\` during ordinary work. Run either operation only when the user explicitly requests that exact Moru Guard maintenance action.
+3. If \`moru-guard\` is unavailable, run \`npx --yes @taehwandev/moru-guard@latest audit .\` instead and use the same \`npx --yes @taehwandev/moru-guard@latest ...\` form for fixes.
+4. If fixable findings exist, run \`moru-guard audit . --fix\` before implementing.
 5. Never print detected secret values. Keep real secrets only in ignored runtime env files and keep env templates such as \`.env.example\` and \`.env.sample\` value-free.
 6. ${approvalPolicy.rule}
 7. Prefer cost-aware architecture. Before adding a paid service, database, queue, background worker, model call, analytics SDK, or cloud resource, explain why existing code or a simpler local/server-side design is insufficient.
 8. For web apps, commonize repeated API/model/provider calls behind shared server-side helpers or endpoints. Prefer server-side caching, batching, and rate limits before adding new client-side call paths.
 9. Before the first commit or push of a task, verify \`git remote -v\`, repository visibility, and changed files. Later commits and pushes in the same task reuse the remote and visibility result while both are unchanged; check the changed files again for each new commit. If the repository is public or visibility is unknown, stop before pushing secrets, env files, credentials, deployment, infrastructure, or paid-service changes.
 10. After editing, run relevant tests and require a successful audit of the finished change. Reuse a matching workflow-hook result under rule 1; otherwise run the audit.
-11. Before creating a commit, require a successful audit of the exact inputs being committed. Before pushing or publishing, require \`vibeguard audit . --strict\` for the exact inputs being published. A workflow, pre-commit, pre-push, or publish hook may supply the matching result under rule 1. Never reuse failed, skipped, uncertain, stale, or non-strict evidence for a strict requirement.
-12. Do not claim tests or audits ran unless they were observed. Run \`vibeguard evidence .\` before the final response only when execution evidence is available and no hook or earlier step in the same run already reported it.
+11. Before creating a commit, require a successful audit of the exact inputs being committed. Before pushing or publishing, require \`moru-guard audit . --strict\` for the exact inputs being published. A workflow, pre-commit, pre-push, or publish hook may supply the matching result under rule 1. Never reuse failed, skipped, uncertain, stale, or non-strict evidence for a strict requirement.
+12. Do not claim tests or audits ran unless they were observed. Run \`moru-guard evidence .\` before the final response only when execution evidence is available and no hook or earlier step in the same run already reported it.
 13. Keep secrets server-side. Do not expose provider keys, database URLs, signing secrets, service-role keys, or webhook secrets to client code.
 14. If the user pastes a secret in chat, treat it as exposed to the chat transcript and recommend rotating it when it matters, but do not refuse to use it. Use it only where the user asks and only through non-public paths: an ignored local env file, the user's own local tool configuration, or a secret-store prompt. Never echo it back, and never write it to tracked files, commits, logs, issue or PR text, or client code. Send it to GitHub secrets, deployment settings, or servers only when the user explicitly names that target (rule 6).
-15. Keep VibeGuard scoped to guardrails. Do not clone, vendor, install, or link external playbooks or rule libraries unless the user explicitly asks for that separate setup.
-16. Preserve existing repo-local instructions. Only update the managed VibeGuard block between the \`vibeguard:start\` and \`vibeguard:end\` markers.
+15. Keep Moru Guard scoped to guardrails. Do not clone, vendor, install, or link external playbooks or rule libraries unless the user explicitly asks for that separate setup.
+16. Preserve existing repo-local instructions. Only update the managed Moru Guard block between the \`vibeguard:start\` and \`vibeguard:end\` markers.
 
-Refresh this managed block only during an explicitly requested VibeGuard \`setup\` or \`update\` task.
+Refresh this managed block only during an explicitly requested Moru Guard \`setup\` or \`update\` task.
 ${AGENT_RULE_END}`;
 }

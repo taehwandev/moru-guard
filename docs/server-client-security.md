@@ -1,7 +1,7 @@
 # Server-To-Client Security
 
 Client code is public. Anything sent to a browser, mobile app, desktop app, or
-static bundle can be copied by the user. VibeGuard treats server-to-client work
+static bundle can be copied by the user. Moru Guard treats server-to-client work
 as a security boundary decision, not a simple refactor.
 
 ## Boundary Rule

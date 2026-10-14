@@ -1,24 +1,24 @@
-# VibeGuard
+# Moru Guard
 
-VibeGuard is a preflight safety check for AI coding agents.
+Moru Guard is a preflight safety check for AI coding agents.
 
 - Website: https://vibeguard.thdev.app/
-- Tao Agent OS: https://tao.thdev.app/
+- Moru Core: https://github.com/taehwandev/moru-core
 - Korean guide: [docs/ko.md](docs/ko.md)
-- Package: `@taehwandev/vibeguard`
+- Package: `@taehwandev/moru-guard` (the `vibeguard` command remains an alias)
 
 ## For AI Coding Agents
 
-If a user gives you this repository link and asks you to apply VibeGuard, treat
+If a user gives you this repository link and asks you to apply Moru Guard, treat
 the link as an instruction to install project guardrails in the user's current
-target project. Do not ask the user to install VibeGuard manually.
+target project. Do not ask the user to install Moru Guard manually.
 
 Run this in the target project:
 
 ```bash
-npx --yes @taehwandev/vibeguard@latest setup .
-npx --yes @taehwandev/vibeguard@latest audit . --fix
-npx --yes @taehwandev/vibeguard@latest audit .
+npx --yes @taehwandev/moru-guard@latest setup .
+npx --yes @taehwandev/moru-guard@latest audit . --fix
+npx --yes @taehwandev/moru-guard@latest audit .
 ```
 
 Then continue with the user's original coding request.
@@ -53,10 +53,10 @@ Rules:
 - For web apps, consolidate repeated API/model calls behind shared server-side
   helpers and cache stable or slow-changing data on the server before adding new
   client-side fetching paths or paid integrations.
-- If a VibeGuard audit exits non-zero, treat it as a stop signal unless the user
+- If a Moru Guard audit exits non-zero, treat it as a stop signal unless the user
   explicitly approves the risky next step.
-- If the audit says VibeGuard guardrails are stale, run
-  `npx --yes @taehwandev/vibeguard@latest update .` once and rerun the audit.
+- If the audit says Moru Guard guardrails are stale, run
+  `npx --yes @taehwandev/moru-guard@latest update .` once and rerun the audit.
 - Report only what was installed, what safe fixes were applied, what checks ran,
   and what risks remain.
 
@@ -68,10 +68,10 @@ You do not need to type terminal commands yourself. Copy this sentence into your
 AI coding chat:
 
 ```text
-Apply https://github.com/taehwandev/VibeGuard to this project.
+Apply https://github.com/taehwandev/moru-guard to this project.
 ```
 
-The default audience is non-developers. VibeGuard should show simple status with
+The default audience is non-developers. Moru Guard should show simple status with
 distinct emoji while the AI agent handles safe fixes behind the scenes.
 Developers can tune the behavior with `.vibeguard.json`.
 
@@ -84,26 +84,26 @@ available at https://vibeguard.thdev.app/.
 ## CLI
 
 ```bash
-npx --yes @taehwandev/vibeguard@latest setup .
-vibeguard setup .
-vibeguard update .
-vibeguard version
-vibeguard audit .
-vibeguard audit . --fix
-vibeguard audit . --strict
-vibeguard hook run . --event post-edit
-vibeguard hook status .
-vibeguard evidence install-claude-hook .
-vibeguard evidence .
-vibeguard prompt . --request "Add login"
+npx --yes @taehwandev/moru-guard@latest setup .
+moru-guard setup .
+moru-guard update .
+moru-guard version
+moru-guard audit .
+moru-guard audit . --fix
+moru-guard audit . --strict
+moru-guard hook run . --event post-edit
+moru-guard hook status .
+moru-guard evidence install-claude-hook .
+moru-guard evidence .
+moru-guard prompt . --request "Add login"
 ```
 
-Language can be selected with `--lang` or `VIBEGUARD_LANG`.
+Language can be selected with `--lang` or `MORU_GUARD_LANG` (`VIBEGUARD_LANG` remains supported).
 
 ```bash
-vibeguard audit . --lang en
-vibeguard audit . --lang ko
-VIBEGUARD_LANG=ko vibeguard audit .
+moru-guard audit . --lang en
+moru-guard audit . --lang ko
+MORU_GUARD_LANG=ko moru-guard audit .
 ```
 
 Supported languages: `en`, `ko`.
@@ -114,11 +114,11 @@ Audit exit codes:
 - `1`: warnings in `--strict` mode
 - `2`: blocked
 
-`vibeguard version` prints the local package version without hitting the network.
+`moru-guard version` prints the local package version without hitting the network.
 
 ## Agent Hook Fast Path
 
-`vibeguard hook run` is the low-noise path for agent runtime hooks. It reuses
+`moru-guard hook run` is the low-noise path for agent runtime hooks. It reuses
 the same deterministic audit core, scans only Git changed files by default, and
 writes a compact local status file:
 
@@ -130,22 +130,22 @@ The default output is one line so agents do not need to read the full audit
 report on every edit:
 
 ```bash
-vibeguard hook run . --event post-edit
-vibeguard hook status .
+moru-guard hook run . --event post-edit
+moru-guard hook status .
 ```
 
 Use `--json` when a hook runner needs machine-readable compact status. Use
 `--full` for a full scan. For a manual audit limited to the current Git diff,
-use `vibeguard audit . --changed-only`; for a narrower spot check, add
+use `moru-guard audit . --changed-only`; for a narrower spot check, add
 `--path <path>`. Git `pre-commit`, `pre-push`, CI, release checks, and manual
-review should continue to use `vibeguard audit .` or `vibeguard audit . --strict`.
+review should continue to use `moru-guard audit .` or `moru-guard audit . --strict`.
 
 ## What It Does
 
 - Installs a managed `AGENTS.md` safety block.
 - Uses a weekly update check by default. Audits warn when local guardrails are
   stale, and the agent refreshes them once with
-  `npx --yes @taehwandev/vibeguard@latest update .`.
+  `npx --yes @taehwandev/moru-guard@latest update .`.
 - Adds safe env ignore rules.
 - Keeps runtime env files ignored and env templates such as `.env.example` and
   `.env.sample` value-free.
@@ -153,7 +153,7 @@ review should continue to use `vibeguard audit .` or `vibeguard audit . --strict
 - Quarantines simple JS/TS/Python hard-coded secrets with `--fix`.
 - Installs local `pre-commit` and `pre-push` hooks for another safety check
   before commit and push.
-- Preserves existing Git hooks. VibeGuard installs a named
+- Preserves existing Git hooks. Moru Guard installs a named
   `vibeguard-preflight` managed block inside Git's fixed hook files and keeps
   existing hook logic after the safety gate.
 - Provides a low-noise `hook run/status` path for agent runtime hooks that need
@@ -163,7 +163,7 @@ review should continue to use `vibeguard audit .` or `vibeguard audit . --strict
 - Records optional execution evidence from agent hooks so verification claims
   can be checked against observed commands.
 - Installs an optional local Claude Code evidence hook with
-  `vibeguard evidence install-claude-hook .`.
+  `moru-guard evidence install-claude-hook .`.
 - Flags risky scripts, paid integrations, and data/cost risks.
 - Pushes agents toward cost-aware architecture instead of adding services,
   dependencies, or infrastructure by default.
@@ -172,18 +172,18 @@ review should continue to use `vibeguard audit .` or `vibeguard audit . --strict
 - Stays scoped to guardrails; it does not install or link external playbooks by
   default.
 
-## Tao Agent OS Relationship
+## Moru Core Relationship
 
-VibeGuard is the safety gate. Tao Agent OS is the external agent execution layer
+Moru Guard is the safety gate. Moru Core is the external agent execution layer
 for planning, implementation, verification, review, and handoff. This repository
-links to an existing local Tao Agent OS path when configured, but it does not
-clone, vendor, or copy Tao Agent OS into a target project by default.
+links to an existing local Moru Core path when configured, but it does not
+clone, vendor, or copy Moru Core into a target project by default.
 
-Tao Agent OS website: https://tao.thdev.app/
+Moru Core: https://github.com/taehwandev/moru-core
 
 ## Configuration
 
-`vibeguard setup .` creates `.vibeguard.json` for developer tuning. The default
+`moru-guard setup .` creates `.vibeguard.json` for developer tuning. The default
 mode is intentionally guided:
 
 ```json
@@ -209,7 +209,7 @@ mode is intentionally guided:
 }
 ```
 
-VibeGuard does not update itself during ordinary audits or development work.
+Moru Guard does not update itself during ordinary audits or development work.
 Run `setup` or `update` only as an explicit maintenance action for a relevant
 policy or compatibility change. Elapsed time alone is not an update reason.
 Audits do not query package registries or request updates based on age, even
@@ -239,7 +239,7 @@ where that threshold is written down. Both forms acknowledge the dependency;
 entries without a `reason` are additionally listed as an informational finding
 so the missing basis stays visible without failing the audit.
 
-Paid dependency findings are warnings, never blocks: `vibeguard audit` exits `0`
+Paid dependency findings are warnings, never blocks: `moru-guard audit` exits `0`
 for them unless you pass `--strict`. Acknowledgement records that the dependency
 received a human cost review. It does not remove the package, match related
 package names, disable other Cost findings, or weaken `--strict`. Any

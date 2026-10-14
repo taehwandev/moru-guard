@@ -18,9 +18,9 @@ test("init creates project policy and config", () => {
 
   assert.ok(applied.includes("Created .vibeguard.json."));
   assert.ok(applied.includes("Created VIBEGUARD.md."));
-  assert.ok(applied.includes("Created AGENTS.md VibeGuard instructions."));
-  assert.ok(applied.includes("Installed pre-commit VibeGuard hook."));
-  assert.ok(applied.includes("Installed pre-push VibeGuard hook."));
+  assert.ok(applied.includes("Created AGENTS.md Moru Guard instructions."));
+  assert.ok(applied.includes("Installed pre-commit Moru Guard hook."));
+  assert.ok(applied.includes("Installed pre-push Moru Guard hook."));
   assert.ok(fs.existsSync(path.join(root, ".vibeguard.json")));
   assert.ok(fs.existsSync(path.join(root, "VIBEGUARD.md")));
   assert.ok(fs.existsSync(path.join(root, "AGENTS.md")));
@@ -33,7 +33,7 @@ test("init creates project policy and config", () => {
 
   const agentInstructions = fs.readFileSync(path.join(root, "AGENTS.md"), "utf8");
   assert.match(agentInstructions, /<!-- vibeguard:start version=1 -->/);
-  assert.match(agentInstructions, /Keep VibeGuard scoped to guardrails/);
+  assert.match(agentInstructions, /Keep Moru Guard scoped to guardrails/);
   assert.match(agentInstructions, /Preserve existing repo-local instructions/);
   assert.match(agentInstructions, /only when the user explicitly requests/);
   assert.doesNotMatch(agentInstructions, /default refresh interval is 7 days/);
@@ -53,20 +53,20 @@ test("init creates project policy and config", () => {
   assert.doesNotMatch(agentInstructions, /environment-specific URLs/);
   assert.match(
     agentInstructions,
-    /npx --yes @taehwandev\/vibeguard@latest audit \./
+    /npx --yes @taehwandev\/moru-guard@latest audit \./
   );
 
   const preCommit = fs.readFileSync(path.join(root, ".git", "hooks", "pre-commit"), "utf8");
   const prePush = fs.readFileSync(path.join(root, ".git", "hooks", "pre-push"), "utf8");
   assert.match(preCommit, /# vibeguard:managed-hook:start name=vibeguard-preflight version=4 hook=pre-commit/);
-  assert.match(preCommit, /Managed by VibeGuard \(@taehwandev\/vibeguard\)/);
-  assert.match(preCommit, /vibeguard hook run \. --event pre-commit/);
+  assert.match(preCommit, /Managed by Moru Guard \(@taehwandev\/moru-guard\)/);
+  assert.match(preCommit, /moru-guard hook run \. --event pre-commit/);
   assert.doesNotMatch(preCommit, /vibeguard audit \./);
   assert.doesNotMatch(preCommit, /npx --yes @taehwandev\/vibeguard@latest update \./);
   assert.doesNotMatch(preCommit, /--strict/);
   assert.match(prePush, /# vibeguard:managed-hook:start name=vibeguard-preflight version=4 hook=pre-push/);
   assert.match(prePush, /delete-only push; content audit skipped/);
-  assert.match(prePush, /vibeguard audit \. --strict/);
+  assert.match(prePush, /moru-guard audit \. --strict/);
   assert.doesNotMatch(prePush, /npx --yes @taehwandev\/vibeguard@latest update \./);
   assert.equal((fs.statSync(path.join(root, ".git", "hooks", "pre-commit")).mode & 0o111) > 0, true);
 
@@ -262,7 +262,7 @@ test("init preserves existing shell hooks while adding VibeGuard checks", () => 
   fs.writeFileSync(path.join(hooksRoot, "pre-commit"), "#!/bin/sh\nset -e\necho existing hook\n", "utf8");
 
   const applied = initProject(root);
-  assert.ok(applied.includes("Added VibeGuard check to existing pre-commit hook."));
+  assert.ok(applied.includes("Added Moru Guard check to existing pre-commit hook."));
 
   const preCommit = fs.readFileSync(path.join(hooksRoot, "pre-commit"), "utf8");
   assert.match(preCommit, /^#!\/bin\/sh\n/);
@@ -278,7 +278,7 @@ test("init wraps existing non-shell hooks instead of overwriting them", () => {
   fs.writeFileSync(path.join(hooksRoot, "pre-push"), "#!/usr/bin/env node\nconsole.log('existing hook');\n", "utf8");
 
   const applied = initProject(root);
-  assert.ok(applied.includes("Wrapped existing pre-push hook with VibeGuard check."));
+  assert.ok(applied.includes("Wrapped existing pre-push hook with Moru Guard check."));
 
   const prePush = fs.readFileSync(path.join(hooksRoot, "pre-push"), "utf8");
   const original = fs.readFileSync(path.join(hooksRoot, "pre-push.vibeguard-original"), "utf8");
@@ -308,7 +308,7 @@ test("init migrates legacy VibeGuard hook markers while preserving existing shel
   );
 
   const applied = initProject(root);
-  assert.ok(applied.includes("Updated pre-commit VibeGuard hook."));
+  assert.ok(applied.includes("Updated pre-commit Moru Guard hook."));
 
   const preCommit = fs.readFileSync(path.join(hooksRoot, "pre-commit"), "utf8");
   assert.doesNotMatch(preCommit, /echo old VibeGuard hook/);
@@ -339,7 +339,7 @@ test("init updates only the managed VibeGuard agent instruction block", () => {
   );
 
   const applied = initProject(root);
-  assert.ok(applied.includes("Updated AGENTS.md VibeGuard instructions."));
+  assert.ok(applied.includes("Updated AGENTS.md Moru Guard instructions."));
 
   const agentInstructions = fs.readFileSync(path.join(root, "AGENTS.md"), "utf8");
   assert.match(agentInstructions, /Keep this project-specific note\./);

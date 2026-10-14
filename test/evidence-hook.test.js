@@ -37,9 +37,9 @@ test("evidence installs Claude Code local hook idempotently", () => {
   assert.equal(installed.status, 0);
   const result = JSON.parse(installed.stdout);
   assert.deepEqual(result.events, ["PostToolUse", "PostToolUseFailure"]);
-  assert.match(result.command, /command -v vibeguard/);
-  assert.match(result.command, /\bvibeguard evidence claude-hook/);
-  assert.match(result.command, /npx --yes @taehwandev\/vibeguard@latest evidence claude-hook/);
+  assert.match(result.command, /command -v moru-guard/);
+  assert.match(result.command, /\bmoru-guard evidence claude-hook/);
+  assert.match(result.command, /npx --yes @taehwandev\/moru-guard@latest evidence claude-hook/);
   const shellCheck = spawnSync("bash", ["-n"], { input: result.command, encoding: "utf8" });
   assert.equal(shellCheck.status, 0, shellCheck.stderr);
 

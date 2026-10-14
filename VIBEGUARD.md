@@ -1,6 +1,6 @@
-# VibeGuard Operating Policy
+# Moru Guard Operating Policy
 
-VibeGuard blocks or fixes avoidable mistakes before AI-generated code changes a
+Moru Guard blocks or fixes avoidable mistakes before AI-generated code changes a
 project.
 
 ## Default Gates
@@ -15,7 +15,7 @@ project.
 
 ## Agent Rule
 
-When VibeGuard finds an issue the tool can fix safely, it should fix it before
+When Moru Guard finds an issue the tool can fix safely, it should fix it before
 asking the user. Ask the user only when the next step can destroy data, spend
 money, deploy externally, or requires private credentials.
 
@@ -25,7 +25,7 @@ Obtain explicit user authority before deleting data, running migrations, deployi
 
 ## Update Policy
 
-Do not refresh VibeGuard on a timer or as part of ordinary audit, edit, review,
+Do not refresh Moru Guard on a timer or as part of ordinary audit, edit, review,
 commit, or push work. Run `setup` or `update` only when the user explicitly
 requests that operation for a relevant policy or compatibility change. Elapsed
 time alone is not a reason to update. Audits do not check registry versions or
@@ -46,7 +46,7 @@ when the user explicitly names that target.
 
 ## Git Gate Rule
 
-Run `vibeguard audit .` before commits and `vibeguard audit . --strict`
+Run `moru-guard audit .` before commits and `moru-guard audit . --strict`
 before pushes or public package publication.
 
 The managed pre-push hook skips that content audit only when every ref update

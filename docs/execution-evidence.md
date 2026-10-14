@@ -1,8 +1,8 @@
 # Execution Evidence
 
-VibeGuard should not rely only on an agent saying that a command ran. The
+Moru Guard should not rely only on an agent saying that a command ran. The
 long-term guardrail is an execution evidence layer: adapters record what the
-agent actually executed, and VibeGuard summarizes the evidence.
+agent actually executed, and Moru Guard summarizes the evidence.
 
 This is not a replacement for tests, CI, or code review. It is a lightweight way
 to catch a common AI-agent failure mode: reporting that verification happened
@@ -10,7 +10,7 @@ when no matching command was observed.
 
 ## Local Ledger
 
-VibeGuard records adapter events in:
+Moru Guard records adapter events in:
 
 ```text
 .vibeguard/session/events.jsonl
@@ -34,7 +34,7 @@ commands and metadata:
 Generate a summary:
 
 ```bash
-vibeguard evidence .
+moru-guard evidence .
 ```
 
 ## Claude Code Prototype
@@ -45,14 +45,14 @@ execution.
 Install the local, non-shared Claude Code hook:
 
 ```bash
-vibeguard evidence install-claude-hook .
+moru-guard evidence install-claude-hook .
 ```
 
 This writes `.claude/settings.local.json` and adds ignore rules for the local
 settings file and evidence ledger. The command is idempotent and preserves other
 Claude Code settings.
 
-The installed hook pipes hook input into VibeGuard:
+The installed hook pipes hook input into Moru Guard:
 
 ```json
 {
@@ -63,7 +63,7 @@ The installed hook pipes hook input into VibeGuard:
         "hooks": [
           {
             "type": "command",
-            "command": "npx --yes @taehwandev/vibeguard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\""
+            "command": "npx --yes @taehwandev/moru-guard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\""
           }
         ]
       }
@@ -74,7 +74,7 @@ The installed hook pipes hook input into VibeGuard:
         "hooks": [
           {
             "type": "command",
-            "command": "npx --yes @taehwandev/vibeguard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\""
+            "command": "npx --yes @taehwandev/moru-guard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\""
           }
         ]
       }
@@ -83,12 +83,12 @@ The installed hook pipes hook input into VibeGuard:
 }
 ```
 
-VibeGuard redacts likely secrets before writing the event, including npm access
+Moru Guard redacts likely secrets before writing the event, including npm access
 tokens, provider keys, database URLs, and private keys. It currently tracks
 whether these command classes were observed:
 
-- `vibeguard audit .`
-- `vibeguard audit . --strict`
+- `moru-guard audit .`
+- `moru-guard audit . --strict`
 - common test commands such as `npm test`, `pytest`, `cargo test`, `go test`,
   and `swift test`
 
@@ -96,7 +96,7 @@ whether these command classes were observed:
 
 Keep the core ledger agent-neutral. Claude Code, Codex, Antigravity, and future
 tools should write the same event shape through small adapters. If an agent has
-no reliable hook layer, VibeGuard should say that execution evidence is weak
+no reliable hook layer, Moru Guard should say that execution evidence is weak
 rather than pretending it is enforced.
 
 ## Current Limit

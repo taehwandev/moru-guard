@@ -14,7 +14,7 @@ jobs:
     name: Publish package
     runs-on: ubuntu-latest
     environment: npm-release
-    if: github.repository == 'taehwandev/VibeGuard'
+    if: github.repository == 'taehwandev/moru-guard'
     env:
       RELEASE_TAG: ${{ github.event.release.tag_name }}
       HAS_FIRST_PUBLISH_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
@@ -56,6 +56,10 @@ jobs:
           import fs from "node:fs";
 
           const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+          if (pkg.name !== "@taehwandev/moru-guard") {
+            console.error("Release package name is not @taehwandev/moru-guard.");
+            process.exit(1);
+          }
           const expected = `v${pkg.version}`;
           const actual = process.env.RELEASE_TAG;
 

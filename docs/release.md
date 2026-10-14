@@ -1,6 +1,6 @@
 # Release Policy
 
-VibeGuard uses calendar-style release numbers:
+Moru Guard uses calendar-style release numbers:
 
 ```text
 YY.WW.N
@@ -46,9 +46,10 @@ npm run release:prepare
 
 ## Artifacts And Deployment Targets
 
-VibeGuard has two production surfaces:
+Moru Guard has two production surfaces:
 
-- CLI package: `@taehwandev/vibeguard` on npm.
+- CLI package: `@taehwandev/moru-guard` on npm. The published
+  `@taehwandev/vibeguard` package remains available for existing consumers.
 - Static website: GitHub Pages from `site/`.
 
 The CLI does not have a separate compile or bundle step. `package.json` exposes
@@ -78,7 +79,7 @@ matching GitHub Release is published.
 Use the release number as the package version. Use a `v` prefix for Git tags:
 
 ```text
-package: @taehwandev/vibeguard@26.21.0
+package: @taehwandev/moru-guard@26.21.0
 git tag: v26.21.0
 ```
 
@@ -140,7 +141,7 @@ Use npm Trusted Publishing with GitHub Actions OIDC. Configure npm's trusted
 publisher for:
 
 - Owner: `taehwandev`
-- Repository: `VibeGuard`
+- Repository: `moru-guard`
 - Workflow filename: `publish-npm.yml`
 - Environment: `npm-release`
 - Allowed action: `npm publish`
@@ -150,7 +151,7 @@ For the first publish only, use a temporary automation token stored as an
 environment secret, not as a repository file:
 
 ```bash
-gh secret set NPM_TOKEN --repo taehwandev/VibeGuard --env npm-release
+gh secret set NPM_TOKEN --repo taehwandev/moru-guard --env npm-release
 ```
 
 The `npm-release` environment must require a reviewer before publish jobs can
@@ -165,13 +166,13 @@ terminal logs, or `.npmrc`.
 Immediately after the first publish succeeds, configure trusted publishing:
 
 ```bash
-npm trust github @taehwandev/vibeguard --file publish-npm.yml --repo taehwandev/VibeGuard --env npm-release --allow-publish
+npm trust github @taehwandev/moru-guard --file publish-npm.yml --repo taehwandev/moru-guard --env npm-release --allow-publish
 ```
 
 Then remove the temporary secret and revoke/delete the npm token:
 
 ```bash
-gh secret delete NPM_TOKEN --repo taehwandev/VibeGuard --env npm-release
+gh secret delete NPM_TOKEN --repo taehwandev/moru-guard --env npm-release
 ```
 
 Future releases must use GitHub Actions OIDC. Keep the workflow's `id-token:

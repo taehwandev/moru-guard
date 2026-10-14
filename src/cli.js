@@ -101,7 +101,7 @@ function main() {
 
       if (hookArgs.action === "status") {
         const status = loadHookStatus(projectRoot);
-        if (!status) throw new Error("No VibeGuard hook status found. Run `vibeguard hook run .` first.");
+        if (!status) throw new Error("No Moru Guard hook status found. Run `moru-guard hook run .` first.");
         if (parsed.flags.json) process.stdout.write(`${JSON.stringify(status, null, 2)}\n`);
         else process.stdout.write(`${formatHookStatusLine(status)}\n`);
         process.exitCode = status.exitCode ?? 1;
@@ -159,7 +159,7 @@ function main() {
 
     throw new Error(`Unknown command: ${parsed.command}`);
   } catch (error) {
-    process.stderr.write(`vibeguard: ${error.message}\n`);
+    process.stderr.write(`moru-guard: ${error.message}\n`);
     process.exitCode = 1;
   }
 }
@@ -284,7 +284,7 @@ function readPackageInfo() {
   const raw = fs.readFileSync(packagePath, "utf8");
   const pkg = JSON.parse(raw);
   return {
-    name: pkg.name ?? "@taehwandev/vibeguard",
+    name: pkg.name ?? "@taehwandev/moru-guard",
     version: pkg.version ?? "0.0.0"
   };
 }

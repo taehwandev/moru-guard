@@ -1,6 +1,6 @@
 # Guard Scope
 
-VibeGuard is a guard, not a playbook installer.
+Moru Guard is a guard, not a playbook installer.
 
 Its job is to reduce avoidable damage before an AI coding agent changes a
 project. It should inspect local state, apply narrow safe fixes, and stop risky
@@ -8,9 +8,9 @@ work for approval.
 
 ## Responsibilities
 
-- Install or refresh the VibeGuard-managed safety block in repo-local agent
+- Install or refresh the Moru Guard-managed safety block in repo-local agent
   instructions.
-- Preserve existing project instructions outside the managed VibeGuard block.
+- Preserve existing project instructions outside the managed Moru Guard block.
 - Protect runtime env files and keep env templates such as `.env.example` and
   `.env.sample` value-free.
 - Detect likely hard-coded secrets without printing the values.
@@ -37,7 +37,7 @@ work for approval.
 
 ## Non-Responsibilities
 
-- Do not clone, vendor, install, or link Tao Agent OS or any other external
+- Do not clone, vendor, install, or link Moru Core or any other external
   playbook by default.
 - Do not copy large guidance libraries into a target repository.
 - Do not replace project-specific agent instructions, coding conventions,
@@ -52,14 +52,14 @@ work for approval.
 - Do not duplicate client-side fetching, paid provider calls, or model calls in
   multiple components when a shared server-side access path can handle it.
 - Do not enforce application URL placement policy. Environment-specific URL
-  guidance belongs in Tao Agent OS skills, project instructions, or platform
+  guidance belongs in Moru Core skills, project instructions, or platform
   docs rather than this guardrail layer.
 - Do not claim full agent control, rollback, or retry enforcement from execution
   evidence alone.
 
 ## Boundary Rule
 
-VibeGuard may read an optional configured rule source when the user or project
+Moru Guard may read an optional configured rule source when the user or project
 explicitly provides one, but setup must remain a guardrail installation flow. A
-separate playbook connection flow belongs outside VibeGuard unless the user
+separate playbook connection flow belongs outside Moru Guard unless the user
 explicitly asks for that separate setup.

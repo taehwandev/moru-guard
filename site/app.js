@@ -1,8 +1,8 @@
 const translations = {
   en: {
-    pageTitle: "VibeGuard - Preflight Checks for AI Coding Agents",
+    pageTitle: "Moru Guard - Preflight Checks for AI Coding Agents",
     metaDescription: "Paste one line into an AI coding chat so the agent checks secrets, cost, data, deploy, and repository risks before editing a real project.",
-    brandHomeLabel: "VibeGuard home",
+    brandHomeLabel: "Moru Guard home",
     primaryNavLabel: "Primary navigation",
     languageSelectorLabel: "Language selector",
     switchToEnglishLabel: "Switch to English",
@@ -15,16 +15,16 @@ const translations = {
     navHow: "How it works",
     navChecks: "Safety Gates",
     navDocs: "Docs",
-    navTao: "Tao Agent OS",
+    navTao: "Moru Core",
     navAudience: "Who it's for",
     eyebrow: "Preflight checks for AI coding agents",
-    heroTitle: "Before an AI edits your project, make it run VibeGuard.",
+    heroTitle: "Before an AI edits your project, make it run Moru Guard.",
     heroLead: "Paste one line into Cursor, Windsurf, Claude Code, or another coding chat. The agent installs local guardrails, checks the risky parts first, and asks before changes that can expose secrets, spend money, alter data, or push to the wrong place.",
     trustOne: "Paste into any coding chat",
     trustTwo: "Secrets stay redacted",
     trustThree: "Cost and deploy checks before new infrastructure",
     magicPromptLabel: "One line to paste into your AI agent",
-    magicPromptText: "Apply VibeGuard to this project: https://github.com/taehwandev/VibeGuard",
+    magicPromptText: "Apply Moru Guard to this project: https://github.com/taehwandev/moru-guard",
     copyButtonText: "Copy",
     copySuccessText: "Copied",
     copyFailureText: "Select text manually",
@@ -33,7 +33,7 @@ const translations = {
     githubButton: "Open GitHub",
     docsButton: "Read the guide",
 
-    sceneAuditTitle: "VibeGuard audit",
+    sceneAuditTitle: "Moru Guard audit",
     sceneSecret: "Secrets redacted",
     sceneCost: "Paid API boundary",
     sceneDeploy: "Production deploy pause",
@@ -44,20 +44,20 @@ const translations = {
     audienceHeading: "Two paths: paste-and-go for users, local guardrails for maintainers",
     nonDevTitle: "If you use an AI coding chat",
     nonDevSub: "Start without terminal work",
-    nonDevText: "You can paste the instruction and let the agent do the setup. VibeGuard tells the agent to inspect the repo, fix low-risk guardrail gaps, and stop before actions that need your approval.",
+    nonDevText: "You can paste the instruction and let the agent do the setup. Moru Guard tells the agent to inspect the repo, fix low-risk guardrail gaps, and stop before actions that need your approval.",
 
     devTitle: "If you maintain the repo",
     devSub: "Keep AI edits inside known boundaries",
-    devText: "VibeGuard adds managed AGENTS.md instructions, audit output, and optional git hooks. It catches hard-coded secrets, risky scripts, public-repo push hazards, paid-service drift, and client/server credential mistakes before they become release problems.",
+    devText: "Moru Guard adds managed AGENTS.md instructions, audit output, and optional git hooks. It catches hard-coded secrets, risky scripts, public-repo push hazards, paid-service drift, and client/server credential mistakes before they become release problems.",
 
-    taoHeading: "Use VibeGuard with Tao Agent OS when the work needs a full agent workflow.",
-    taoVibeTitle: "VibeGuard is the safety gate",
+    taoHeading: "Use Moru Guard with Moru Core when the work needs a full agent workflow.",
+    taoVibeTitle: "Moru Guard is the safety gate",
     taoVibeSub: "Before risky edits",
     taoVibeText: "It checks secrets, cost, data, deploy, server boundary, and repository risk before an AI agent changes a project.",
-    taoAgentTitle: "Tao Agent OS is the agent execution layer",
+    taoAgentTitle: "Moru Core is the agent execution layer",
     taoAgentSub: "Plan, build, verify, review",
     taoAgentText: "It gives agents reusable workflow, engineering, review, platform, and handoff guidance without copying long prompt files into every repo.",
-    taoButton: "Open Tao Agent OS",
+    taoButton: "Open Moru Core",
 
     howEyebrow: "Workflow",
     howTitle: "The agent does the setup, but the risky calls still come back to you.",
@@ -66,7 +66,7 @@ const translations = {
     stepTwoTitle: "2. Let it run the checks",
     stepTwoText: "The agent installs or refreshes local guardrails, runs an audit, and applies only low-risk safety fixes.",
     stepThreeTitle: "3. Approve the risky parts",
-    stepThreeText: "If the next step can delete data, expose credentials, spend money, deploy production, or push sensitive files, VibeGuard tells the agent to stop and ask.",
+    stepThreeText: "If the next step can delete data, expose credentials, spend money, deploy production, or push sensitive files, Moru Guard tells the agent to stop and ask.",
 
     checksEyebrow: "Safety guardrails",
     checksTitle: "The checks are practical: secrets, cost, data, deployment, and Git.",
@@ -88,28 +88,28 @@ const translations = {
     tabTerminal: "Developer CLI terminal",
     chatUserName: "You",
     chatHeaderTitle: "Cursor / Windsurf / Claude Code",
-    chatUserMsg: "Apply VibeGuard to this project: https://github.com/taehwandev/VibeGuard",
+    chatUserMsg: "Apply Moru Guard to this project: https://github.com/taehwandev/moru-guard",
     chatAgentName: "AI coding assistant",
-    chatAgentIntro: "I will apply VibeGuard, inspect the project, and install the local safety gates.",
+    chatAgentIntro: "I will apply Moru Guard, inspect the project, and install the local safety gates.",
     chatAgentLogGit: "[ok] Checked env ignore rules.",
     chatAgentLogAgents: "[ok] Updated AGENTS.md safety instructions.",
     chatAgentLogHooks: "[ok] Installed commit and push checks.",
-    chatAgentOutro: "VibeGuard is applied. I will continue with the task, but I will stop before database deletion, paid-service expansion, sensitive production deploys, or risky pushes.",
-    terminalOutput: `$ npx --yes @taehwandev/vibeguard@latest setup .
+    chatAgentOutro: "Moru Guard is applied. I will continue with the task, but I will stop before database deletion, paid-service expansion, sensitive production deploys, or risky pushes.",
+    terminalOutput: `$ npx --yes @taehwandev/moru-guard@latest setup .
 
 Applied fixes:
 ✅ Updated .gitignore env protection rules.
-✅ Updated AGENTS.md VibeGuard instructions.
+✅ Updated AGENTS.md Moru Guard instructions.
 ✅ Installed local pre-commit and pre-push checks.
 
-[VibeGuard Audit Report]
+[Moru Guard Audit Report]
 Overall: ✅ Ready`,
     footerRepo: "Repository"
   },
   ko: {
-    pageTitle: "VibeGuard - AI 코딩 에이전트용 사전 안전 점검",
+    pageTitle: "Moru Guard - AI 코딩 에이전트용 사전 안전 점검",
     metaDescription: "AI 코딩 채팅창에 한 줄을 붙여넣으면 에이전트가 실제 프로젝트를 수정하기 전에 비밀값, 비용, 데이터, 배포, Git 위험을 먼저 확인합니다.",
-    brandHomeLabel: "VibeGuard 홈",
+    brandHomeLabel: "Moru Guard 홈",
     primaryNavLabel: "기본 내비게이션",
     languageSelectorLabel: "언어 선택",
     switchToEnglishLabel: "영어로 전환",
@@ -122,16 +122,16 @@ Overall: ✅ Ready`,
     navHow: "작동 방식",
     navChecks: "안전 게이트",
     navDocs: "문서",
-    navTao: "Tao Agent OS",
+    navTao: "Moru Core",
     navAudience: "누구를 위한가",
     eyebrow: "AI 코딩 에이전트용 사전 안전 점검",
-    heroTitle: "AI가 프로젝트를 고치기 전에, 먼저 VibeGuard를 실행하게 하세요.",
+    heroTitle: "AI가 프로젝트를 고치기 전에, 먼저 Moru Guard를 실행하게 하세요.",
     heroLead: "Cursor, Windsurf, Claude Code 같은 코딩 채팅창에 한 줄만 붙여넣으면 됩니다. 에이전트가 로컬 가드레일을 설치하고 위험한 지점을 먼저 확인한 뒤, 비밀값 노출, 비용 증가, 데이터 변경, 잘못된 push 앞에서 멈춥니다.",
     trustOne: "코딩 채팅창에 그대로 붙여넣기",
     trustTwo: "비밀값은 출력하지 않음",
     trustThree: "새 인프라보다 비용과 배포 위험 먼저 확인",
     magicPromptLabel: "AI 에이전트에게 붙여넣을 한 줄",
-    magicPromptText: "이 프로젝트에 VibeGuard를 적용해줘: https://github.com/taehwandev/VibeGuard",
+    magicPromptText: "이 프로젝트에 Moru Guard를 적용해줘: https://github.com/taehwandev/moru-guard",
     copyButtonText: "복사",
     copySuccessText: "복사 완료",
     copyFailureText: "직접 선택해 주세요",
@@ -140,7 +140,7 @@ Overall: ✅ Ready`,
     githubButton: "GitHub 열기",
     docsButton: "한국어 안내 보기",
 
-    sceneAuditTitle: "VibeGuard 점검",
+    sceneAuditTitle: "Moru Guard 점검",
     sceneSecret: "비밀값 가림",
     sceneCost: "유료 API 경계",
     sceneDeploy: "운영 배포 전 멈춤",
@@ -151,20 +151,20 @@ Overall: ✅ Ready`,
     audienceHeading: "사용자는 한 줄만 붙여넣고, 관리자는 로컬 가드레일을 남깁니다",
     nonDevTitle: "AI 코딩 채팅을 쓰는 사람",
     nonDevSub: "터미널 없이 시작",
-    nonDevText: "복사한 지시어를 채팅창에 넣으면 에이전트가 설정을 처리합니다. VibeGuard는 에이전트가 먼저 저장소를 살피고, 위험이 낮은 안전 설정만 고친 뒤, 사용자의 승인이 필요한 작업 앞에서 멈추게 합니다.",
+    nonDevText: "복사한 지시어를 채팅창에 넣으면 에이전트가 설정을 처리합니다. Moru Guard는 에이전트가 먼저 저장소를 살피고, 위험이 낮은 안전 설정만 고친 뒤, 사용자의 승인이 필요한 작업 앞에서 멈추게 합니다.",
 
     devTitle: "저장소를 관리하는 개발자",
     devSub: "AI 수정 범위를 프로젝트 안에 묶기",
     devText: "관리되는 AGENTS.md 지침, audit 출력, 선택형 Git 훅으로 AI 작업 흐름에 안전선을 남깁니다. 하드코딩된 비밀값, 위험한 스크립트, public repo push 위험, 유료 서비스 확장, 클라이언트로 새는 인증 정보를 릴리스 전에 확인합니다.",
 
-    taoHeading: "작업 흐름까지 필요하다면 VibeGuard와 Tao Agent OS를 함께 쓰세요.",
-    taoVibeTitle: "VibeGuard는 안전 게이트입니다",
+    taoHeading: "작업 흐름까지 필요하다면 Moru Guard와 Moru Core를 함께 쓰세요.",
+    taoVibeTitle: "Moru Guard는 안전 게이트입니다",
     taoVibeSub: "위험한 수정 전 점검",
     taoVibeText: "AI가 프로젝트를 수정하기 전에 비밀값, 비용, 데이터, 배포, 서버 경계, 저장소 위험을 먼저 확인합니다.",
-    taoAgentTitle: "Tao Agent OS는 에이전트 실행 체계입니다",
+    taoAgentTitle: "Moru Core는 에이전트 실행 체계입니다",
     taoAgentSub: "계획, 구현, 검증, 리뷰",
     taoAgentText: "긴 프롬프트를 저장소마다 복사하지 않고도 에이전트가 재사용할 수 있는 workflow, engineering, review, platform, handoff 지침을 제공합니다.",
-    taoButton: "Tao Agent OS 열기",
+    taoButton: "Moru Core 열기",
 
     howEyebrow: "작동 흐름",
     howTitle: "설정은 에이전트가 처리하고, 위험한 결정은 사용자에게 돌아옵니다.",
@@ -173,7 +173,7 @@ Overall: ✅ Ready`,
     stepTwoTitle: "2. 점검 실행시키기",
     stepTwoText: "에이전트가 로컬 가드레일을 설치하거나 갱신하고, audit을 실행한 뒤 낮은 위험의 안전 수정만 처리합니다.",
     stepThreeTitle: "3. 위험한 작업 승인하기",
-    stepThreeText: "다음 작업이 데이터 삭제, 인증 정보 노출, 비용 증가, 운영 배포, 민감 파일 push로 이어질 수 있으면 VibeGuard가 에이전트를 멈추게 합니다.",
+    stepThreeText: "다음 작업이 데이터 삭제, 인증 정보 노출, 비용 증가, 운영 배포, 민감 파일 push로 이어질 수 있으면 Moru Guard가 에이전트를 멈추게 합니다.",
 
     checksEyebrow: "안전 점검 항목",
     checksTitle: "점검 범위는 명확합니다: 비밀값, 비용, 데이터, 배포, Git.",
@@ -195,21 +195,21 @@ Overall: ✅ Ready`,
     tabTerminal: "개발자용 CLI 터미널",
     chatUserName: "사용자",
     chatHeaderTitle: "Cursor / Windsurf / Claude Code",
-    chatUserMsg: "이 프로젝트에 VibeGuard를 적용해줘: https://github.com/taehwandev/VibeGuard",
+    chatUserMsg: "이 프로젝트에 Moru Guard를 적용해줘: https://github.com/taehwandev/moru-guard",
     chatAgentName: "AI 코딩 비서",
-    chatAgentIntro: "VibeGuard를 적용하고 프로젝트를 점검한 뒤 로컬 안전 게이트를 설치하겠습니다.",
+    chatAgentIntro: "Moru Guard를 적용하고 프로젝트를 점검한 뒤 로컬 안전 게이트를 설치하겠습니다.",
     chatAgentLogGit: "[ok] env ignore 규칙 확인",
     chatAgentLogAgents: "[ok] AGENTS.md 안전 지침 갱신",
     chatAgentLogHooks: "[ok] commit/push 전 점검 설치",
-    chatAgentOutro: "VibeGuard 적용이 완료되었습니다. 작업은 이어가되, DB 삭제, 유료 서비스 확장, 민감한 운영 배포, 위험한 push 앞에서는 멈춰서 확인하겠습니다.",
-    terminalOutput: `$ npx --yes @taehwandev/vibeguard@latest setup .
+    chatAgentOutro: "Moru Guard 적용이 완료되었습니다. 작업은 이어가되, DB 삭제, 유료 서비스 확장, 민감한 운영 배포, 위험한 push 앞에서는 멈춰서 확인하겠습니다.",
+    terminalOutput: `$ npx --yes @taehwandev/moru-guard@latest setup .
 
 적용된 수정:
 ✅ .gitignore env 보호 규칙을 업데이트했습니다.
-✅ AGENTS.md VibeGuard 지침을 갱신했습니다.
+✅ AGENTS.md Moru Guard 지침을 갱신했습니다.
 ✅ commit/push 전 점검을 설치했습니다.
 
-[VibeGuard 점검 리포트]
+[Moru Guard 점검 리포트]
 전체 상태: ✅ 진행 가능`,
     footerRepo: "저장소"
   }

@@ -5,22 +5,24 @@ import { redactCredentialUrlSecrets } from "./secret-url.js";
 const EVIDENCE_FILE = path.join(".vibeguard", "session", "events.jsonl");
 const CLAUDE_LOCAL_SETTINGS = path.join(".claude", "settings.local.json");
 const CLAUDE_EVIDENCE_COMMAND = [
-  "if command -v vibeguard >/dev/null 2>&1; then",
+  "if command -v moru-guard >/dev/null 2>&1; then",
+  "  moru-guard evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\"",
+  "elif command -v vibeguard >/dev/null 2>&1; then",
   "  vibeguard evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\"",
   "elif command -v npx >/dev/null 2>&1; then",
-  "  npx --yes @taehwandev/vibeguard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\"",
+  "  npx --yes @taehwandev/moru-guard@latest evidence claude-hook \"${CLAUDE_PROJECT_DIR:-.}\"",
   "else",
-  "  echo \"VibeGuard: install Node.js/npm or make vibeguard available before running evidence hooks.\" >&2; exit 1",
+  "  echo \"Moru Guard: install Node.js/npm or make vibeguard available before running evidence hooks.\" >&2; exit 1",
   "fi"
 ].join("\n");
 const CLAUDE_HOOK_EVENTS = ["PostToolUse", "PostToolUseFailure"];
 
 const COMMAND_CHECKS = [
-  { key: "audit", label: "VibeGuard audit", regex: /\b(?:vibeguard|vibe-guard)\s+audit\s+\./ },
+  { key: "audit", label: "Moru Guard audit", regex: /\b(?:moru-guard|vibeguard|vibe-guard)\s+audit\s+\./ },
   {
     key: "strictAudit",
-    label: "VibeGuard strict audit",
-    regex: /\b(?:vibeguard|vibe-guard)\s+audit\s+\.[^\n]*\s--strict\b/
+    label: "Moru Guard strict audit",
+    regex: /\b(?:moru-guard|vibeguard|vibe-guard)\s+audit\s+\.[^\n]*\s--strict\b/
   },
   {
     key: "test",
@@ -120,7 +122,7 @@ export function evidenceFilePath(projectRoot) {
 
 export function formatEvidenceReport(summary) {
   const lines = [];
-  lines.push("[VibeGuard Evidence Report]");
+  lines.push("[Moru Guard Evidence Report]");
   lines.push("");
   lines.push(`Events: ${summary.eventCount}`);
   lines.push(`Commands: ${summary.commandCount}`);
@@ -153,7 +155,7 @@ export function installClaudeEvidenceHook(projectRoot) {
 
   if (
     appendUniqueLines(path.join(projectRoot, ".gitignore"), [
-      "# VibeGuard local agent evidence",
+      "# Moru Guard local agent evidence",
       ".claude/settings.local.json",
       ".vibeguard/session/"
     ])
@@ -213,5 +215,5 @@ function ensureClaudeBashHook(existing, command) {
 }
 
 function isVibeGuardEvidenceHook(hook) {
-  return hook?.type === "command" && /\bvibeguard(?:@[\w.-]+)?\s+evidence\s+claude-hook\b/.test(hook.command ?? "");
+  return hook?.type === "command" && /\b(?:moru-guard|vibeguard)(?:@[\w.-]+)?\s+evidence\s+claude-hook\b/.test(hook.command ?? "");
 }

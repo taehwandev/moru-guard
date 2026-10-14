@@ -39,20 +39,20 @@ export function ensureGitHook(projectRoot, hook) {
       const next = composeShellHook(joinHookSections(before, after), block);
       if (next === existing) return null;
       writeExecutableHook(hookPath, next);
-      return `Updated ${hook.name} VibeGuard hook.`;
+      return `Updated ${hook.name} Moru Guard hook.`;
     }
   }
 
   if (existing.trim().length === 0) {
     writeExecutableHook(hookPath, composeShellHook("", block));
-    return `Installed ${hook.name} VibeGuard hook.`;
+    return `Installed ${hook.name} Moru Guard hook.`;
   }
 
   if (isShellHook(existing)) {
     const next = composeShellHook(existing, block);
     if (next === existing) return null;
     writeExecutableHook(hookPath, next);
-    return `Added VibeGuard check to existing ${hook.name} hook.`;
+    return `Added Moru Guard check to existing ${hook.name} hook.`;
   }
 
   const originalHookPath = `${hookPath}.vibeguard-original`;
@@ -63,7 +63,7 @@ export function ensureGitHook(projectRoot, hook) {
   }
 
   writeExecutableHook(hookPath, wrapperHook(block));
-  return `Wrapped existing ${hook.name} hook with VibeGuard check.`;
+  return `Wrapped existing ${hook.name} hook with Moru Guard check.`;
 }
 
 function resolveHookPath(projectRoot, hookName) {
@@ -92,7 +92,7 @@ function hookBlock(hook) {
     ? prePushHookBody(hook)
     : auditHookBody(hook);
   return `# vibeguard:managed-hook:start name=${HOOK_RULE_NAME} version=${HOOK_RULE_VERSION} hook=${hook.name}
-# Managed by VibeGuard (@taehwandev/vibeguard). Re-run \`vibeguard update .\` to refresh.
+# Managed by Moru Guard (@taehwandev/moru-guard). Re-run \`moru-guard update .\` to refresh.
 ${body}
 # vibeguard:managed-hook:end name=${HOOK_RULE_NAME}`;
 }
@@ -113,7 +113,7 @@ if [ "$vibeguard_saw_update" != "true" ]; then
   vibeguard_delete_only=false
 fi
 if [ "$vibeguard_delete_only" = "true" ]; then
-  echo "VibeGuard: delete-only push; content audit skipped." >&2
+  echo "Moru Guard: delete-only push; content audit skipped." >&2
 else
 ${auditHookBody(hook, " </dev/null")}
 fi
@@ -127,16 +127,18 @@ fi`;
 }
 
 function auditHookBody(hook, stdinRedirect = "") {
-  return `echo "VibeGuard: running ${hook.name} safety audit..." >&2
+  return `echo "Moru Guard: running ${hook.name} safety audit..." >&2
 vibeguard_repo_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$vibeguard_repo_root" || exit 1
 PATH="$vibeguard_repo_root/node_modules/.bin:$PATH"
-if command -v vibeguard >/dev/null 2>&1; then
+if command -v moru-guard >/dev/null 2>&1; then
+  moru-guard ${hook.command}${stdinRedirect}
+elif command -v vibeguard >/dev/null 2>&1; then
   vibeguard ${hook.command}${stdinRedirect}
 elif command -v npx >/dev/null 2>&1; then
-  npx --yes @taehwandev/vibeguard@latest ${hook.command}${stdinRedirect}
+  npx --yes @taehwandev/moru-guard@latest ${hook.command}${stdinRedirect}
 else
-  echo "VibeGuard: install Node.js/npm or make vibeguard available before committing or pushing." >&2
+  echo "Moru Guard: install Node.js/npm or make vibeguard available before committing or pushing." >&2
   exit 1
 fi`;
 }

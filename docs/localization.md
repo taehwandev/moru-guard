@@ -1,6 +1,6 @@
 # Localization Strategy
 
-VibeGuard should separate AI-facing instructions from human-facing
+Moru Guard should separate AI-facing instructions from human-facing
 distribution copy.
 
 ## Canonical Language

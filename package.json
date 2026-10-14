@@ -1,9 +1,10 @@
 {
-  "name": "@taehwandev/vibeguard",
+  "name": "@taehwandev/moru-guard",
   "version": "26.40.1",
-  "description": "Preflight safety checker and auto-fixer for non-developers using AI coding agents.",
+  "description": "Moru Guard preflight safety checker for AI coding agents.",
   "type": "module",
   "bin": {
+    "moru-guard": "src/cli.js",
     "vibeguard": "src/cli.js"
   },
   "files": [
@@ -29,12 +30,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/taehwandev/VibeGuard.git"
+    "url": "git+https://github.com/taehwandev/moru-guard.git"
   },
   "bugs": {
-    "url": "https://github.com/taehwandev/VibeGuard/issues"
+    "url": "https://github.com/taehwandev/moru-guard/issues"
   },
-  "homepage": "https://github.com/taehwandev/VibeGuard#readme",
+  "homepage": "https://github.com/taehwandev/moru-guard#readme",
   "license": "MIT",
   "engines": {
     "node": ">=18"

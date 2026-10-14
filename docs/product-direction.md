@@ -2,7 +2,7 @@
 
 ## Positioning
 
-VibeGuard is an AI coding safety layer for non-developers.
+Moru Guard is an AI coding safety layer for non-developers.
 
 It should not behave like a lecture. It should:
 
@@ -22,15 +22,15 @@ playbooks by default.
 ## First Useful User Flow
 
 ```text
-User gives the VibeGuard GitHub link to an AI coding agent
+User gives the Moru Guard GitHub link to an AI coding agent
 -> Agent reads the repo bootstrap instructions
 -> Agent runs setup in the user's current project
--> VibeGuard installs project policy and managed agent instructions
+-> Moru Guard installs project policy and managed agent instructions
 -> User types a normal request
--> Agent runs VibeGuard before editing
--> VibeGuard fixes safe setup gaps
+-> Agent runs Moru Guard before editing
+-> Moru Guard fixes safe setup gaps
 -> Agent implements with guardrails
--> Agent runs VibeGuard again before finishing
+-> Agent runs Moru Guard again before finishing
 ```
 
 ## Install And Update Model
@@ -38,12 +38,12 @@ User gives the VibeGuard GitHub link to an AI coding agent
 The default product behavior should be "install once, then stay out of the
 user's way."
 
-- `vibeguard setup .` installs the project policy, config, env protection, and
+- `moru-guard setup .` installs the project policy, config, env protection, and
   managed `AGENTS.md` block.
-- `vibeguard update .` reruns the same idempotent setup path and refreshes the
-  VibeGuard managed block, config defaults, hooks, and local update-check state.
+- `moru-guard update .` reruns the same idempotent setup path and refreshes the
+  Moru Guard managed block, config defaults, hooks, and local update-check state.
 - Agents should prefer the published npm package form:
-  `npx --yes @taehwandev/vibeguard@latest ...`.
+  `npx --yes @taehwandev/moru-guard@latest ...`.
 - Updates are explicit maintenance for relevant policy or compatibility changes.
   Elapsed time alone must not produce an audit finding or require a refresh.
   Audits do not poll package registries; legacy scheduling settings do not
@@ -59,7 +59,7 @@ user's way."
 - Agent-facing documents should stay in English. CLI output, generated prompts,
   and distribution pages can be localized with explicit language selection; see
   `docs/localization.md`.
-- External playbooks or rule libraries are separate products. VibeGuard may
+- External playbooks or rule libraries are separate products. Moru Guard may
   read an explicitly configured rule source, but setup should not clone, vendor,
   install, or link one by default.
 
@@ -71,7 +71,7 @@ The user should be able to paste only this link into an AI coding agent:
 https://github.com/taehwandev/VibeGuard
 ```
 
-The agent should infer that it needs to install or refresh VibeGuard in the
+The agent should infer that it needs to install or refresh Moru Guard in the
 current project, run the safety workflow, and continue the user's original task.
 
 ## MVP Principle
@@ -81,7 +81,7 @@ later as an optional layer for ambiguous architecture or product-risk decisions.
 
 ## Cost-Aware Architecture Principle
 
-VibeGuard should not encourage agents to solve every request by attaching more
+Moru Guard should not encourage agents to solve every request by attaching more
 services. Before an agent adds a paid API, model call, analytics SDK, database,
 queue, background worker, scheduled job, storage bucket, or cloud resource, it
 should first consider existing code, static/local behavior, server-side reuse,
