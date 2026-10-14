@@ -1,6 +1,6 @@
 {
   "name": "@taehwandev/moru-guard",
-  "version": "26.42.0",
+  "version": "26.42.1",
   "description": "Moru Guard preflight safety checker for AI coding agents.",
   "type": "module",
   "bin": {
