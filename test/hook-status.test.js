@@ -142,7 +142,7 @@ function commitAll(root) {
   runGit(root, ["config", "user.email", "vibeguard@example.test"]);
   runGit(root, ["config", "user.name", "VibeGuard Test"]);
   runGit(root, ["add", "."]);
-  runGit(root, ["commit", "-q", "-m", "test snapshot"]);
+  runGit(root, ["-c", `core.hooksPath=${path.join(root, ".git", "test-disabled-hooks")}`, "commit", "-q", "-m", "test snapshot"]);
 }
 
 function runGit(cwd, args) {
