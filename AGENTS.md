@@ -170,9 +170,9 @@ requires missed-gate recovery.
 
 Do not load every shared document by default.
 This block uses `${TAO_HOME}` as the portable shared-root reference; a
-repo-relative pinned path such as `.agents/tao-agent-os` is the alternative when
+repo-relative pinned path such as `.agents/moru-core` is the alternative when
 this repo intentionally owns a root. Do not commit a personal absolute path such
-as `/Users/.../tao-agent-os`. Full local paths belong only in shell environment
+as `/Users/.../moru-core`. Full local paths belong only in shell environment
 setup, one-shot prompts, or uncommitted user-level runtime bridges. Use legacy
 `${KEYFLOW_AGENT_ROOT}` only when the environment already provides it.
 Keep repo paths, commands, components, role matrices, and domain terms in this repo.

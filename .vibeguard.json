@@ -1,7 +1,7 @@
 {
   "mode": "guided",
   "display": "emoji",
-  "rulesPath": "~/git/tao-agent-os",
+  "rulesPath": "~/git/moru-core",
   "maxFileLines": 800,
   "repository": {
     "visibility": "public"
