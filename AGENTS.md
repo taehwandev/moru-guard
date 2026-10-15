@@ -1,19 +1,19 @@
-<!-- BEGIN MANAGED TAO AGENT OS ROUTING -->
-## Tao Agent OS Active Routing
+<!-- BEGIN MANAGED MORU CORE ROUTING -->
+## Moru Core Active Routing
 
 This managed block is generated from `templates/repo-agents-routing.md` in the
-shared Tao Agent OS. Refresh it from that template instead of hand-editing it.
+shared Moru Core. Refresh it from that template instead of hand-editing it.
 Everything outside this block is repo-owned and stays the source of truth for
 project paths, commands, domain rules, and product policy.
 
-Shared Tao Agent OS library:
+Shared Moru Core library:
 
 ```text
-${TAO_HOME}/AGENTS.md
-${TAO_HOME}/index.md
-${TAO_HOME}/scripts/agent-entry.py
-${TAO_HOME}/scripts/project-discover.py
-<TAO_LAUNCHER>
+${MORU_HOME}/AGENTS.md
+${MORU_HOME}/index.md
+${MORU_HOME}/scripts/agent-entry.py
+${MORU_HOME}/scripts/project-discover.py
+<MORU_LAUNCHER>
 ```
 
 Use repo-local instructions first. If this block is being installed into a
@@ -27,8 +27,8 @@ apply its Git/worktree policy after initialization. If `agent-entry.py`
 returns `selected`, prefer
 starting or relaunching the runtime with that selected repo as the primary
 workspace. For Codex, use `codex -C <TARGET_REPO>`; add
-`--add-dir ${TAO_HOME}` only when the task needs the shared
-Tao Agent OS root in the session workspace. Repo instruction files define
+`--add-dir ${MORU_HOME}` only when the task needs the shared
+Moru Core root in the session workspace. Repo instruction files define
 behavior; runtime launch options define filesystem scope. Before work in a
 target project, explicitly read its instruction file when present for this
 runtime: Codex-style agents read `AGENTS.md`, Claude reads `CLAUDE.md` when
@@ -50,14 +50,14 @@ repo was written, pass it as `workspace scope checkpoint=<evidence>`,
 
 Use the workflow router for narrow selection. Do not read `index.md` after
 successful routing; it is a fallback catalog, not another startup requirement.
-Do not create repo-local skill documents merely to copy shared Tao Agent OS
+Do not create repo-local skill documents merely to copy shared Moru Core
 behavior. Keep repo-local skills, workflows, wiki pages, or runbooks only when
 they contain product-specific facts, commands, domain policy, or verification
 that cannot be shared safely.
 
 VibeGuard is required before documentation, code, config, dependency, data,
 deployment, or credential changes. In a tracked lifecycle the start and review
-hooks run it with ${TAO_HOME} as the rule source and report `VibeGuard overall`;
+hooks run it with ${MORU_HOME} as the rule source and report `VibeGuard overall`;
 read that line instead of repeating the audit, and run the package command
 yourself only when a hook reports `Skipped`, when no tracked lifecycle is in
 use, or as `--strict` before push or publish.
@@ -81,7 +81,7 @@ read-only answers. When updating an installed routing block, replace its older
 blanket multi-step requirements and check local adapters for contradictions;
 preserve product-specific contracts, safety rules and metering integration.
 
-For tracked multi-step tasks, run `<TAO_LAUNCHER> start` once with `--request
+For tracked multi-step tasks, run `<MORU_LAUNCHER> start` once with `--request
 "<USER_REQUEST>"`; it runs workflow routing/preflight and reports the required
 hooks for the route. Do not separately repeat workflow list, classify, route, or
 preflight. Use the start output as the command manifest before selecting task
@@ -106,7 +106,7 @@ verification, delegate automatically without waiting for explicit user
 multi-agent wording. Use Codex native workers, Claude Agent/Task workers, or
 the Gemini/AGY Antigravity agent runner according to the active runtime.
 Otherwise record the concrete serial reason. At each parent-to-worker boundary,
-run `<TAO_LAUNCHER> handoff`; it refreshes the provider-neutral, content-free
+run `<MORU_LAUNCHER> handoff`; it refreshes the provider-neutral, content-free
 execution capsule and validates it once. A ready and valid handoff lets the
 worker reuse the parent's route, preflight, and required-doc manifest and skip
 duplicate startup. An invalid handoff is a successful fallback decision that
@@ -124,11 +124,11 @@ the work then proceeds into code, use the `product` route unless an existing
 PRD/ARD or repo-local instruction makes the slice clearly trivial.
 
 Documentation enforcement for the active tracked route is owned centrally by
-the shared Tao Agent OS finish-check across all runtimes; this pointer does not
+the shared Moru Core finish-check across all runtimes; this pointer does not
 add a documentation gate or approval round to read-only answers.
 Do not duplicate or restate these rules in repo-local files; keep only this
 pointer. The source of truth and the exception process are
-`${TAO_HOME}/workflows/skills/documentation-update/SKILL.md`; add
+`${MORU_HOME}/workflows/skills/documentation-update/SKILL.md`; add
 exceptions there rather than self-judging. Load that card when the active route
 requires it or an unresolved documentation decision needs its contract.
 
@@ -141,18 +141,18 @@ to be 🐱🟢 SUCCESS. Use only two cat signal badges in human-visible reports:
 missed, or missing evidence and triggers missed-gate recovery: stop
 finalization, preserve the first failed checkpoint, roll back only dependent
 agent-made changes when safe, and run the retrospective workflow. Improve and
-verify the owning Tao Agent OS doc, hook, validator, or test before resuming
+verify the owning Moru Core doc, hook, validator, or test before resuming
 that checkpoint. One repair cycle is allowed; stop on the same failure or an
 unsafe or ambiguous repair. Do not report any third gate state.
 
 When the wrapper scripts are available, keep the existing start evidence,
-run `<TAO_LAUNCHER> review` after the scoped diff is ready, and run
-`<TAO_LAUNCHER> finish` before final report, commit, release, or handoff. Pass
+run `<MORU_LAUNCHER> review` after the scoped diff is ready, and run
+`<MORU_LAUNCHER> finish` before final report, commit, release, or handoff. Pass
 evidence for every route gate to the finish check. The wrappers write local
 evidence under
 `.tao/`; this directory is runtime evidence and should usually be
 gitignored. When executing wrapper commands from an agent runtime, resolve
-`${TAO_HOME}` and `<TAO_LAUNCHER>` to absolute paths first; do not leave
+`${MORU_HOME}` and `<MORU_LAUNCHER>` to absolute paths first; do not leave
 `$HOME`, `${HOME}`, `~`, or a relative path in the executable command. Missing
 wrapper evidence or missing route gate evidence is
 non-compliant even when the final files look correct. VibeGuard `Needs review`
@@ -169,14 +169,14 @@ missing Grill-Me protocol or `/grilling` session evidence is 🐱🔴 FAIL and
 requires missed-gate recovery.
 
 Do not load every shared document by default.
-This block uses `${TAO_HOME}` as the portable shared-root reference; a
+This block uses `${MORU_HOME}` as the portable shared-root reference; a
 repo-relative pinned path such as `.agents/moru-core` is the alternative when
 this repo intentionally owns a root. Do not commit a personal absolute path such
 as `/Users/.../moru-core`. Full local paths belong only in shell environment
 setup, one-shot prompts, or uncommitted user-level runtime bridges. Use legacy
 `${KEYFLOW_AGENT_ROOT}` only when the environment already provides it.
 Keep repo paths, commands, components, role matrices, and domain terms in this repo.
-<!-- END MANAGED TAO AGENT OS ROUTING -->
+<!-- END MANAGED MORU CORE ROUTING -->
 # VibeGuard Project Instructions
 
 This project builds a small CLI safety layer for non-developers using AI coding
